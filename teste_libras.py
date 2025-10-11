@@ -18,16 +18,6 @@ cap = cv2.VideoCapture(0)
 cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1366) 
 
 cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 768)
-contador = 0
-contadorLetra = 0
-pontos = 0
-corTexto = (255, 255, 255)
-
-palavra = []
-
-l = 0
-palavra_escolhida = str(input("Digite uma palavra: ")).upper()
-
 
 
 sinal_previsto = "Aguardando Gesto..."
@@ -60,28 +50,10 @@ with mp_hands.Hands(min_detection_confidence=0.7, min_tracking_confidence=0.7) a
 
                 # retorna o sinal
                 sinal_previsto = modelo.predict(dados_entrada)[0] # 0 pq ele retornar um array, ai ele pega o primeiro elemento
-                if contador >= 80:
-                    palavra.append(sinal_previsto)
-                    if contadorLetra <= len(palavra_escolhida):
-                        print(len(palavra_escolhida))
-                        if sinal_previsto == palavra_escolhida[contadorLetra]:
-                            print(sinal_previsto, palavra_escolhida[contadorLetra])
-        
-                            pontos += 1
-                        else: 
-                
-                            print(sinal_previsto, palavra_escolhida[contadorLetra])
-                            print(len(palavra_escolhida))
-                    else:
-                        print(len(palavra_escolhida))
-                        break
-                    contador = 0
-                    contadorLetra += 1
         else:
             sinal_previsto = "Aguardando Gesto..." 
         cv2.putText(frame, f"SINAL: {sinal_previsto}", (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 3)
-        cv2.putText(frame, f" {palavra}", (50, 120), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 3)
-        cv2.putText(frame, f"pontuacao: {pontos}", (990, 55), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 3)
+        cv2.putText(frame, f"pontuacao: 0", (990, 55), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 3)
         cv2.imshow('Tradutor Libras ', frame)
         if cv2.waitKey(1) & 0xFF == ord('1'):
             print("fechou")
@@ -89,4 +61,3 @@ with mp_hands.Hands(min_detection_confidence=0.7, min_tracking_confidence=0.7) a
         
 cap.release()
 cv2.destroyAllWindows()
-print(palavra)

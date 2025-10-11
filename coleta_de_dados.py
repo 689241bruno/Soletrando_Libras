@@ -70,7 +70,8 @@ with mp_hands.Hands(min_detection_confidence=0.7, min_tracking_confidence=0.7) a
                     for landmark in hand_landmarks.landmark:
                         keypoints.extend([landmark.x, landmark.y, landmark.z])
 
-                    # [Sinal, x0, y0, z0, x1, y1, z1, ...]
+                    # lista q vai pro csv
+                    #ex A -> x0, y0, z0, x1, y1, z1... <- coordenada de cada ponto da mao
                     row = [SINAL_ATUAL] + keypoints
                     
                     with open(CSV_FILE, mode='a', newline='') as f: # 'a' é para ADICIONAR

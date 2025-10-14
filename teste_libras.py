@@ -15,10 +15,8 @@ except FileNotFoundError:
 mp_drawing = mp.solutions.drawing_utils
 mp_hands = mp.solutions.hands
 cap = cv2.VideoCapture(0)
-cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1366) 
 
-cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 768)
-
+contador = 0
 
 sinal_previsto = "Aguardando Gesto..."
 
